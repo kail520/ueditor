@@ -37,18 +37,21 @@ class Uploader
         "ERROR_HTTP_LINK" => "链接不是http链接",
         "ERROR_HTTP_CONTENTTYPE" => "链接contentType不正确"
     );
+    private $is_oss; //对象存储信息
 
     /**
      * 构造函数
      * @param $fileField  表单名称
      * @param $config 配置项
      * @param string $type 是否解析base64编码，可省略。若开启，则$fileField代表的是base64编码的字符串表单名
+     * @param $is_oss 是否开启oss上传
      */
-    public function __construct($fileField, $config, $type = "upload")
+    public function __construct($fileField, $config, $type = "upload", $is_oss = false)
     {
         $this->fileField = $fileField;
         $this->config = $config;
         $this->type = $type;
+        $this->is_oss = $is_oss;
         if ($type == "remote") {
             $this->saveRemote();
         } else if ($type == "base64") {
@@ -113,8 +116,10 @@ class Uploader
         if (!(move_uploaded_file($file["tmp_name"], $this->filePath) && file_exists($this->filePath))) { //移动失败
             $this->stateInfo = $this->getStateInfo("ERROR_FILE_MOVE");
         } else { //移动成功
-//            print_r($this->config);
-            $this->stateInfo = $this->stateMap[0] . $this->fullName . '|' . $this->filePath;
+            if ($this->is_oss) {
+                ossUpload($this->filePath, substr($this->fullName, 1));
+            }
+            $this->stateInfo = $this->stateMap[0];
         }
     }
 

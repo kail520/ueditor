@@ -142,7 +142,7 @@ class UEditorAction extends Action
         }
         /* 生成上传实例对象并完成上传 */
 
-        $up = new Uploader($fieldName, $config, $base64);
+        $up = new Uploader($fieldName, $config, $base64, $this->config['is_oss']);
         /**
          * 得到上传文件所对应的各个参数,数组结构
          * array(

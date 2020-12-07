@@ -1,17 +1,17 @@
 百度UEditor
 ===========
-[![Latest Stable Version](https://poser.pugx.org/kucha/ueditor/v/stable)](https://packagist.org/packages/kucha/ueditor) [![Total Downloads](https://poser.pugx.org/kucha/ueditor/downloads)](https://packagist.org/packages/kucha/ueditor) 
+
 ### 安装
 Either run
 
 ```
-$ php composer.phar require kucha/ueditor "*"
+$ php composer.phar require kail520/ueditor "*"
 ```
 
 or add
 
 ```
-"kucha/ueditor": "*"
+"kail520/ueditor": "*"
 ```
 
 to the ```require``` section of your `composer.json` file.
@@ -25,7 +25,7 @@ public function actions()
 {
     return [
         'upload' => [
-            'class' => 'kucha\ueditor\UEditorAction',
+            'class' => 'kail520\\ueditor\UEditorAction',
         ]
     ];
 }
@@ -34,7 +34,7 @@ public function actions()
 view:  
 
 ```
-echo \kucha\ueditor\UEditor::widget([]);
+echo \kail520\\ueditor\UEditor::widget([]);
 ```
 
 或者：
@@ -72,8 +72,6 @@ echo UEditor::widget([
         ]
 ]);
 ```
-
-##### 文件上传相关配置，请在`controller`中配置，参数为`config`,例如文件上传路径等；更多参数请参照 [config.php](https://github.com/BigKuCha/yii2-ueditor-widget/blob/master/config.php) (跟UEditor提供的config.json一样)
 
 简单实例:  
 ```php
